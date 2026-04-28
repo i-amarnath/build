@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buildr — Construction Management Software for India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0f0f; --white: #fafaf8; --gray-50: #f7f6f3; --gray-100: #eeece7; --gray-300: #c4c2bb;
+    --gray-500: #888780; --gray-700: #444441; --orange: #e05c2a; --orange-light: #fdf0ea; --orange-dark: #b84419;
+    --green: #2d6a4f; --green-light: #eaf3ee; --radius: 12px; --radius-sm: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06); --shadow-lg: 0 8px 40px rgba(0,0,0,0.10);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--black); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,248,0.94); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(196,194,187,0.35); padding: 0 1.25rem; }
+  .nav-inner { max-width: 1160px; margin: 0 auto; min-height: 76px; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center; }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-mark { width: 42px; height: 42px; border-radius: 14px; background: linear-gradient(135deg, var(--orange), #f0885f); color: var(--white); display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 10px 24px rgba(224,92,42,0.18); }
+  .logo-copy { display: flex; flex-direction: column; line-height: 1; }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--black); text-decoration: none; letter-spacing: -0.5px; }
+  .logo span { color: var(--orange); }
+  .logo-tagline { font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 4px; }
+  .nav-links { justify-self: center; display: flex; align-items: center; gap: 0.5rem; list-style: none; background: rgba(255,255,255,0.62); border: 1px solid rgba(196,194,187,0.35); border-radius: 999px; padding: 0.45rem; box-shadow: 0 8px 24px rgba(15,15,15,0.04); }
+  .nav-links a { font-size: 14px; color: var(--gray-700); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; transition: color 0.2s, background 0.2s, transform 0.2s; }
+  .nav-links a:hover { color: var(--black); background: rgba(224,92,42,0.10); transform: translateY(-1px); }
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
+  .nav-meta { display: flex; align-items: center; gap: 8px; color: var(--gray-500); font-size: 12px; font-weight: 600; padding: 10px 12px; border-radius: 999px; background: var(--gray-50); border: 1px solid var(--gray-100); }
+  .nav-cta { background: var(--black); color: var(--white); border: none; padding: 12px 18px; border-radius: 999px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; box-shadow: 0 10px 24px rgba(15,15,15,0.12); }
+  .nav-cta:hover { background: var(--orange); transform: translateY(-1px); }
+  .hero { max-width: 1100px; margin: 0 auto; padding: 96px 2rem 72px; display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr); gap: 54px; align-items: center; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--orange-light); color: var(--orange-dark); padding: 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 500; margin-bottom: 24px; }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--orange); border-radius: 50%; }
+  h1 { font-family: 'DM Serif Display', serif; font-size: 56px; line-height: 1.04; letter-spacing: -1.7px; color: var(--black); margin-bottom: 20px; }
+  h1 em { color: var(--orange); font-style: italic; }
+  .hero-sub { font-size: 18px; color: var(--gray-500); line-height: 1.7; margin-bottom: 32px; max-width: 620px; }
+  .hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--orange); color: var(--white); padding: 14px 28px; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s, transform 0.1s; }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
+  .btn-ghost { color: var(--gray-700); font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+  .btn-ghost:hover { color: var(--black); }
+  .hero-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; margin-top: 42px; padding-top: 28px; border-top: 1px solid var(--gray-100); }
+  .hero-stats > div { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: 14px; padding: 16px; }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--black); display: block; }
+  .stat-label { font-size: 13px; color: var(--gray-500); }
+  .hero-visual { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
+  .mockup-bar { background: var(--white); border-bottom: 1px solid var(--gray-100); padding: 12px 16px; display: flex; align-items: center; gap: 8px; }
+  .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .mockup-bar-title { font-size: 12px; color: var(--gray-500); margin-left: 8px; font-weight: 500; }
+  .mockup-body { padding: 20px; }
+  .mockup-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 12px; }
+  .mockup-title { font-size: 14px; font-weight: 600; color: var(--black); }
+  .mockup-tag { background: var(--green-light); color: var(--green); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 100px; }
+  .proj-cards { display: flex; flex-direction: column; gap: 10px; }
+  .proj-card { background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius-sm); padding: 14px 16px; }
+  .proj-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 8px; }
+  .proj-name { font-size: 13px; font-weight: 600; color: var(--black); }
+  .proj-loc { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+  .proj-status { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 100px; }
+  .status-on { background: var(--green-light); color: var(--green); }
+  .status-delay { background: #fff4e6; color: #c25a00; }
+  .progress-bar { height: 4px; background: var(--gray-100); border-radius: 100px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 100px; }
+  .prog-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 10px; }
+  .prog-label { font-size: 11px; color: var(--gray-500); }
+  .prog-pct { font-size: 11px; font-weight: 600; color: var(--black); }
+  .budget-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--gray-100); }
+  .budget-item { text-align: center; }
+  .budget-val { font-size: 12px; font-weight: 600; color: var(--black); display: block; }
+  .budget-key { font-size: 10px; color: var(--gray-500); }
+  .mini-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+  .mini-stat { background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius-sm); padding: 10px 12px; text-align: center; }
+  .mini-val { font-size: 16px; font-weight: 600; color: var(--black); display: block; }
+  .mini-key { font-size: 10px; color: var(--gray-500); }
+  .logos-section { background: var(--gray-50); border-top: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100); padding: 28px 2rem; text-align: center; }
+  .logos-label { font-size: 12px; color: var(--gray-500); font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 20px; }
+  .logos-row { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; }
+  .logo-pill { font-size: 14px; font-weight: 600; color: var(--gray-300); letter-spacing: -0.3px; }
+  section { padding: 96px 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; }
+  h2 { font-family: 'DM Serif Display', serif; font-size: 40px; letter-spacing: -1px; line-height: 1.15; margin-bottom: 16px; }
+  .section-sub { font-size: 18px; color: var(--gray-500); max-width: 620px; }
+  .problem-section { background: var(--black); }
+  .problem-section h2 { color: var(--white); }
+  .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #1f1f1f; border: 1px solid #1f1f1f; border-radius: 16px; overflow: hidden; margin-top: 56px; }
+  .problem-card { background: #141414; padding: 36px 32px; }
+  .prob-icon, .feat-icon, .persona-avatar { width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+  .prob-icon { background: #1f1f1f; color: #f5f5f5; }
+  .problem-card h3 { font-size: 17px; font-weight: 600; color: var(--white); margin-bottom: 10px; letter-spacing: -0.3px; }
+  .problem-card p { font-size: 14px; color: #888780; line-height: 1.6; }
+  .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 60px; }
+  .feature-card { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: 16px; padding: 36px; transition: box-shadow 0.2s; }
+  .feature-card:hover { box-shadow: var(--shadow-lg); }
+  .feature-card.featured { background: var(--black); color: var(--white); grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .feat-icon { background: var(--orange-light); color: var(--orange-dark); }
+  .feature-card.featured .feat-icon { background: #1f1f1f; color: var(--white); }
+  .feature-card h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 10px; }
+  .feature-card p { font-size: 14px; color: var(--gray-500); line-height: 1.7; }
+  .feature-card.featured p { color: #888780; }
+  .feat-list { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .feat-list li { font-size: 14px; color: var(--gray-500); display: flex; gap: 8px; align-items: flex-start; }
+  .feat-list li::before { content: '✓'; color: var(--orange); font-weight: 600; flex-shrink: 0; }
+  .feature-card.featured .feat-list li { color: #888780; }
+  .workflow-section { background: var(--gray-50); }
+  .workflow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 60px; position: relative; }
+  .workflow-steps::before { content: ''; position: absolute; top: 28px; left: 10%; right: 10%; height: 1px; background: var(--gray-100); z-index: 0; }
+  .workflow-step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+  .step-num { width: 56px; height: 56px; border-radius: 50%; background: var(--white); border: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--orange); box-shadow: var(--shadow); }
+  .workflow-step h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .workflow-step p { font-size: 13px; color: var(--gray-500); }
+  .personas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .persona-card { border: 1px solid var(--gray-100); border-radius: 16px; overflow: hidden; background: var(--white); }
+  .persona-header { padding: 28px 28px 20px; border-bottom: 1px solid var(--gray-100); }
+  .persona-avatar { margin-bottom: 16px; }
+  .persona-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+  .persona-card .persona-role { font-size: 13px; color: var(--gray-500); }
+  .persona-body { padding: 24px 28px; }
+  .persona-pain { font-size: 13px; color: var(--gray-500); font-style: italic; margin-bottom: 16px; padding: 12px; background: var(--gray-50); border-radius: var(--radius-sm); border-left: 3px solid var(--orange); }
+  .persona-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .persona-features li { font-size: 13px; color: var(--gray-700); display: flex; gap: 8px; }
+  .persona-features li::before { content: '→'; color: var(--orange); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .testimonial-card { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: 16px; padding: 28px; }
+  .stars { color: var(--orange); font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+  .testimonial-text { font-size: 15px; color: var(--black); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .author-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--orange-light); color: var(--orange-dark); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+  .author-name { font-size: 14px; font-weight: 600; }
+  .author-role { font-size: 12px; color: var(--gray-500); }
+  .pricing-section { background: var(--gray-50); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; align-items: start; }
+  .pricing-card { background: var(--white); border: 1px solid var(--gray-100); border-radius: 16px; padding: 32px; }
+  .pricing-card.popular { border: 2px solid var(--orange); position: relative; }
+  .popular-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--orange); color: var(--white); font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 100px; letter-spacing: 0.5px; white-space: nowrap; }
+  .plan-name { font-size: 13px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+  .plan-price { font-family: 'DM Serif Display', serif; font-size: 40px; color: var(--black); letter-spacing: -1px; margin-bottom: 4px; }
+  .plan-price span { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 400; color: var(--gray-500); }
+  .plan-desc { font-size: 13px; color: var(--gray-500); margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--gray-100); }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .plan-features li { font-size: 14px; color: var(--gray-700); display: flex; gap: 8px; align-items: flex-start; }
+  .plan-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+  .plan-cta { width: 100%; padding: 12px; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid var(--gray-100); background: var(--gray-50); color: var(--black); transition: all 0.2s; }
+  .plan-cta:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+  .pricing-card.popular .plan-cta { background: var(--orange); color: var(--white); border-color: var(--orange); }
+  .pricing-card.popular .plan-cta:hover { background: var(--orange-dark); }
+  .cta-section { background: var(--black); text-align: center; padding: 112px 2rem; }
+  .cta-section h2 { color: var(--white); font-size: 52px; max-width: 700px; margin: 0 auto 20px; }
+  .cta-section p { color: #888780; font-size: 18px; margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .modal-overlay { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; padding: 1rem; }
+  .modal-overlay.active { display: flex; }
+  .modal { background: var(--white); border-radius: 20px; width: 100%; max-width: 520px; padding: 42px 36px; box-shadow: 0 24px 80px rgba(0,0,0,0.3); }
+  .modal-close { float: right; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--gray-500); margin: -8px -8px 0 0; }
+  .modal h3 { font-family: 'DM Serif Display', serif; font-size: 28px; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .modal .modal-sub { font-size: 15px; color: var(--gray-500); margin-bottom: 28px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 13px; font-weight: 500; color: var(--gray-700); margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--gray-100); border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 14px; background: var(--gray-50); color: var(--black); outline: none; transition: border-color 0.2s; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--orange); }
+  .form-submit { width: 100%; padding: 13px; background: var(--orange); color: var(--white); border: none; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+  .form-submit:hover { background: var(--orange-dark); }
+  .form-note { font-size: 12px; color: var(--gray-500); text-align: center; margin-top: 14px; }
+  footer { background: var(--black); border-top: 1px solid #1f1f1f; padding: 60px 2rem 32px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand p { font-size: 14px; color: #666; margin-top: 12px; max-width: 240px; line-height: 1.6; }
+  .footer-col h4 { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col a { font-size: 13px; color: #666; text-decoration: none; }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom { border-top: 1px solid #1f1f1f; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .footer-bottom p { font-size: 12px; color: #444; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-content { animation: fadeUp 0.6s ease forwards; }
+  .hero-visual { animation: fadeUp 0.6s 0.15s ease both; }
+  @media (max-width: 980px) {
+    .nav-inner { grid-template-columns: 1fr; justify-items: start; padding: 14px 0; gap: 0.85rem; }
+    .nav-links { justify-self: stretch; overflow-x: auto; width: 100%; justify-content: flex-start; }
+    .nav-actions { width: 100%; justify-content: space-between; }
+    .hero { grid-template-columns: 1fr; gap: 32px; padding-top: 56px; }
+  }
+  @media (max-width: 768px) {
+    body { font-size: 15px; }
+    nav { padding: 0 1rem; }
+    .logo-mark { width: 38px; height: 38px; border-radius: 12px; }
+    .logo { font-size: 20px; }
+    .logo-tagline { font-size: 10px; }
+    .nav-links { width: 100%; padding: 0.4rem; gap: 0.3rem; scrollbar-width: none; }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a { white-space: nowrap; padding: 9px 12px; font-size: 13px; }
+    .nav-meta { display: none; }
+    .nav-actions { width: 100%; }
+    .nav-cta { width: 100%; justify-content: center; padding: 13px 16px; }
+    h1 { font-size: 34px; line-height: 1.08; letter-spacing: -1px; }
+    h2 { font-size: 30px; }
+    section { padding: 72px 1.25rem; }
+    .hero { padding: 42px 1.25rem 32px; gap: 28px; }
+    .hero-badge { margin-bottom: 18px; }
+    .hero-sub { font-size: 16px; margin-bottom: 26px; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions .btn-primary, .hero-actions .btn-ghost { width: 100%; justify-content: center; text-align: center; }
+    .hero-stats { grid-template-columns: 1fr; gap: 14px; margin-top: 30px; }
+    .hero-visual { display: block; border-radius: 14px; }
+    .mockup-body { padding: 16px; }
+    .mini-stat-row { grid-template-columns: 1fr; }
+    .budget-row { grid-template-columns: 1fr; }
+    .logos-section { padding: 24px 1.25rem; }
+    .logos-row { gap: 16px 24px; }
+    .problem-grid, .features-grid, .personas-grid, .testimonials-grid, .pricing-grid { grid-template-columns: 1fr; margin-top: 40px; }
+    .problem-card, .feature-card, .testimonial-card, .pricing-card { padding: 24px 20px; }
+    .persona-header, .persona-body { padding: 22px 20px; }
+    .feature-card.featured { grid-column: span 1; grid-template-columns: 1fr; gap: 24px; }
+    .workflow-steps { grid-template-columns: 1fr; gap: 20px; margin-top: 40px; }
+    .workflow-steps::before { display: none; }
+    .workflow-step { text-align: left; padding: 22px; background: var(--white); border: 1px solid var(--gray-100); border-radius: 16px; box-shadow: var(--shadow); }
+    .step-num { margin: 0 0 16px; }
+    .cta-section { padding: 84px 1.25rem; }
+    .cta-section h2 { font-size: 36px; }
+    .cta-section p { font-size: 16px; }
+    .footer-top { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .modal { padding: 30px 22px; max-height: 90vh; overflow-y: auto; }
+  }
+  @media (max-width: 480px) {
+    h1 { font-size: 30px; }
+    h2 { font-size: 27px; }
+    .hero { padding-top: 34px; }
+    .section-sub { font-size: 16px; }
+    .proj-top, .prog-row { flex-direction: column; align-items: flex-start; }
+    .mockup-header-row { flex-direction: column; align-items: flex-start; }
+    .modal h3 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo-wrap" aria-label="Buildr home">
+      <span class="logo-mark"><i data-lucide="building-2" width="20" height="20"></i></span>
+      <span class="logo-copy"><span class="logo">Build<span>r</span></span><span class="logo-tagline">Construction OS</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features"><i data-lucide="layout-dashboard" width="16" height="16"></i>Features</a></li>
+      <li><a href="#how-it-works"><i data-lucide="workflow" width="16" height="16"></i>How it works</a></li>
+      <li><a href="#pricing"><i data-lucide="badge-indian-rupee" width="16" height="16"></i>Pricing</a></li>
+      <li><a href="#testimonials"><i data-lucide="messages-square" width="16" height="16"></i>Stories</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="nav-meta"><i data-lucide="shield-check" width="14" height="14"></i>Built for Indian construction teams</div>
+      <a href="#" class="nav-cta" onclick="openModal()"><i data-lucide="calendar-check-2" width="16" height="16"></i>Request a Demo</a>
+    </div>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Built for Indian Construction</div>
+    <h1>Run your projects fast<br>and reduce your <em>losses.</em></h1>
+    <p class="hero-sub">Buildr helps you manage your construction business through a simple mobile app that connects your office and your site. No more chaos from WhatsApp groups and Excel sheets everything stays dynamic, time-saving, and easier to control. Time saved means more money.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary" onclick="openModal()">Request a Free Demo</a>
+      <a href="#how-it-works" class="btn-ghost">See how it works →</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-num">7%</span><span class="stat-label">Average cost saved per project</span></div>
+      <div><span class="stat-num">10%</span><span class="stat-label">Reduction in project time</span></div>
+      <div><span class="stat-num">7 days</span><span class="stat-label">To get your whole team on board</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="mockup-bar"><div class="mockup-dot" style="background:#ff5f57"></div><div class="mockup-dot" style="background:#febc2e"></div><div class="mockup-dot" style="background:#28c840"></div><span class="mockup-bar-title">Buildr — Project Dashboard</span></div>
+    <div class="mockup-body">
+      <div class="mockup-header-row"><span class="mockup-title">My Projects</span><span class="mockup-tag">3 Active</span></div>
+      <div class="mini-stat-row" style="margin-bottom:16px;"><div class="mini-stat"><span class="mini-val">₹4.2Cr</span><span class="mini-key">Total Budget</span></div><div class="mini-stat"><span class="mini-val">47</span><span class="mini-key">Tasks Open</span></div><div class="mini-stat"><span class="mini-val">128</span><span class="mini-key">Workers Today</span></div></div>
+      <div class="proj-cards">
+        <div class="proj-card"><div class="proj-top"><div><div class="proj-name">Prestige Residency — Block A</div><div class="proj-loc">Whitefield, Bengaluru</div></div><span class="proj-status status-on">On Track</span></div><div class="prog-row"><span class="prog-label">Completion</span><span class="prog-pct">68%</span></div><div class="progress-bar"><div class="progress-fill" style="width:68%;background:var(--green)"></div></div><div class="budget-row"><div class="budget-item"><span class="budget-val">₹1.8Cr</span><span class="budget-key">Budget</span></div><div class="budget-item"><span class="budget-val">₹1.2Cr</span><span class="budget-key">Spent</span></div><div class="budget-item"><span class="budget-val">₹0.6Cr</span><span class="budget-key">Remaining</span></div></div></div>
+        <div class="proj-card"><div class="proj-top"><div><div class="proj-name">Ravi Towers — Interior Fit-out</div><div class="proj-loc">Anna Nagar, Chennai</div></div><span class="proj-status status-delay">2 Delays</span></div><div class="prog-row"><span class="prog-label">Completion</span><span class="prog-pct">34%</span></div><div class="progress-bar"><div class="progress-fill" style="width:34%;background:#c25a00"></div></div><div class="budget-row"><div class="budget-item"><span class="budget-val">₹80L</span><span class="budget-key">Budget</span></div><div class="budget-item"><span class="budget-val">₹31L</span><span class="budget-key">Spent</span></div><div class="budget-item"><span class="budget-val">₹49L</span><span class="budget-key">Remaining</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="problem-section"><div class="section-inner"><div class="section-label">The Problem</div><h2>Construction is hard.<br>Your software shouldn't make it harder.</h2><div class="problem-grid"><div class="problem-card"><div class="prob-icon"><i data-lucide="messages-square" width="18" height="18"></i></div><h3>WhatsApp is not a project tool</h3><p>Critical updates, material requests, and site photos get buried in group chats. You miss things. Projects slip.</p></div><div class="problem-card"><div class="prob-icon"><i data-lucide="sheet" width="18" height="18"></i></div><h3>Excel breaks under real projects</h3><p>Multiple versions floating around. No one knows which sheet is latest. Budget tracking is always a week behind.</p></div><div class="problem-card"><div class="prob-icon"><i data-lucide="indian-rupee" width="18" height="18"></i></div><h3>Cost overruns catch you off-guard</h3><p>By the time you know you're over budget, you already are. There's no real-time visibility — only end-of-month surprises.</p></div></div></div></section>
+<section id="features"><div class="section-inner"><div class="section-label">What Buildr Does</div><h2>Everything your team needs.<br>Nothing they don't.</h2><p class="section-sub">Buildr covers every workflow from site to office built specifically for how Indian construction businesses actually operate.</p><div class="features-grid"><div class="feature-card featured"><div><div class="feat-icon"><i data-lucide="clipboard-list" width="20" height="20"></i></div><h3 style="color:white">Material Management — Indent to GRN in one flow</h3><p>Your site engineer raises a material indent on the app. Office approves it, converts to a Purchase Order, and when materials arrive, logs a GRN — all in one system. No WhatsApp back-and-forth. No lost invoices.</p><ul class="feat-list"><li>Real-time inventory tracking across all sites</li><li>Automated PO generation from approved indents</li><li>GRN logging with photo proof on mobile</li><li>Vendor payment tracking and reminders</li></ul></div><div><div style="background:#1a1a1a;border-radius:12px;padding:20px;"><div style="font-size:11px;font-weight:600;color:#666;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:16px;">Material Request Flow</div><div style="display:flex;flex-direction:column;gap:8px;"><div style="background:#222;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;"><span style="font-size:13px;color:#fff">Indent Raised — 40 bags cement</span><span style="font-size:11px;background:#2d6a4f22;color:#5cb880;padding:3px 10px;border-radius:100px;font-weight:600;">Pending</span></div><div style="background:#222;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;"><span style="font-size:13px;color:#fff">PO #1042 — Ultra Tech Cement</span><span style="font-size:11px;background:#e05c2a22;color:#e05c2a;padding:3px 10px;border-radius:100px;font-weight:600;">Approved</span></div><div style="background:#222;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;"><span style="font-size:13px;color:#fff">GRN Logged — 40 bags received</span><span style="font-size:11px;background:#2d6a4f22;color:#5cb880;padding:3px 10px;border-radius:100px;font-weight:600;">Done</span></div></div><div style="margin-top:16px;padding-top:16px;border-top:1px solid #2a2a2a;font-size:12px;color:#555;">Vendor: Ultra Tech | Amount: ₹18,400 | Site: Whitefield</div></div></div></div><div class="feature-card"><div class="feat-icon"><i data-lucide="camera" width="20" height="20"></i></div><h3>Daily Progress Reports — auto-generated</h3><p>Site engineers log progress and upload photos from their phone. DPRs are generated automatically and shared with clients. No formatting, no printing, no chasing.</p><ul class="feat-list"><li>1-click DPR and WPR generation</li><li>Live site photos with geotag</li><li>Instant client-ready reports</li></ul></div><div class="feature-card"><div class="feat-icon"><i data-lucide="hard-hat" width="20" height="20"></i></div><h3>Labour & Attendance Tracking</h3><p>Track attendance for labour and staff from the mobile app. See who's on site, calculate payables, and get a daily headcount across all your projects at once.</p><ul class="feat-list"><li>Mobile attendance marking</li><li>Labour payable calculation</li><li>Contractor-wise breakdown</li></ul></div><div class="feature-card"><div class="feat-icon"><i data-lucide="wallet" width="20" height="20"></i></div><h3>Budget & Cost Tracking</h3><p>Set detailed budgets per project phase. Track every rupee spent in real time. Get instant alerts when spending is approaching limits — before it's too late.</p><ul class="feat-list"><li>Phase-wise budget setup</li><li>Real-time expense tracking</li><li>Variance alerts and reports</li></ul></div><div class="feature-card"><div class="feat-icon"><i data-lucide="badge-check" width="20" height="20"></i></div><h3>Task Management</h3><p>Assign tasks to site engineers and track completion status from your phone or desktop. Know exactly what's done, what's blocked, and what's overdue — across every project.</p><ul class="feat-list"><li>Task assignment with deadlines</li><li>Blocker notifications instantly</li><li>Progress tracking per task</li></ul></div></div></div></section>
+<section class="workflow-section" id="how-it-works"><div class="section-inner"><div class="section-label">How It Works</div><h2>From site to office.<br>In real time.</h2><div class="workflow-steps"><div class="workflow-step"><div class="step-num">1</div><h3>Set up your project</h3><p>Create a project, define your budget, add your team, and set milestones — in under 10 minutes.</p></div><div class="workflow-step"><div class="step-num">2</div><h3>Site team logs daily</h3><p>Engineers mark attendance, request materials, update task progress, and upload site photos from their phone.</p></div><div class="workflow-step"><div class="step-num">3</div><h3>Office stays in control</h3><p>Approve indents, issue POs, track spend, and monitor all sites from one dashboard — without visiting.</p></div><div class="workflow-step"><div class="step-num">4</div><h3>Clients see progress</h3><p>Auto-generated reports are sent to clients. Faster payments, fewer calls, more trust.</p></div></div></div></section>
+<section><div class="section-inner"><div class="section-label">Who Uses Buildr</div><h2>Designed for every role<br>in your business.</h2><div class="personas-grid"><div class="persona-card"><div class="persona-header"><div class="persona-avatar" style="background:#fdf0ea;color:#b84419;"><i data-lucide="building" width="22" height="22"></i></div><h3>Business Owner</h3><p class="persona-role">CXO / Founder / Director</p></div><div class="persona-body"><p class="persona-pain">"I have 4 projects running and I don't know if any of them are on budget."</p><ul class="persona-features"><li>Portfolio-level dashboard across all projects</li><li>Real-time financial health per project</li><li>Alerts when budget thresholds are crossed</li><li>Reduced site visits — full visibility remotely</li></ul></div></div><div class="persona-card"><div class="persona-header"><div class="persona-avatar" style="background:#eaf3ee;color:#2d6a4f;"><i data-lucide="clipboard-check" width="22" height="22"></i></div><h3>Project Manager</h3><p class="persona-role">PM / Site Supervisor / Contractor</p></div><div class="persona-body"><p class="persona-pain">"I spend 3 hours a week just creating progress reports."</p><ul class="persona-features"><li>Auto-generated DPRs and WPRs</li><li>Task assignment and tracking in one place</li><li>Instant blocker notifications from site</li><li>Centralised document and file management</li></ul></div></div><div class="persona-card"><div class="persona-header"><div class="persona-avatar" style="background:#e6f1fb;color:#2a5c88;"><i data-lucide="wrench" width="22" height="22"></i></div><h3>Site Engineer</h3><p class="persona-role">Engineer / Foreman / Supervisor</p></div><div class="persona-body"><p class="persona-pain">"I have to call the office 5 times a day just to get materials approved."</p><ul class="persona-features"><li>Raise material indents from the app in 30 seconds</li><li>Mark attendance for labour on mobile</li><li>Log task progress with photos</li><li>Get instant approvals — no phone calls</li></ul></div></div></div></div></section>
+<section class="pricing-section" id="pricing"><div class="section-inner" style="text-align:center"><div class="section-label">Pricing</div><h2>Simple, transparent pricing.</h2><p class="section-sub" style="margin: 0 auto 0;">No hidden costs. Cancel anytime. Start with a 14-day free trial.</p><div class="pricing-grid" style="text-align:left"><div class="pricing-card"><div class="plan-name">Starter</div><div class="plan-price">₹9,999 <span>/ month</span></div><p class="plan-desc">Perfect for small contractors managing 1–3 projects</p><ul class="plan-features"><li>Up to 3 active projects</li><li>Daily Progress Reports</li><li>Labour attendance tracking</li><li>Basic material management</li><li>Mobile app (Android & iOS)</li><li>Email support</li></ul><button class="plan-cta" onclick="openModal()">Start Free Trial</button></div><div class="pricing-card popular"><div class="popular-badge">MOST POPULAR</div><div class="plan-name">Pro</div><div class="plan-price">₹29,999 <span>/ month</span></div><p class="plan-desc">For growing businesses managing multiple projects</p><ul class="plan-features"><li>Unlimited active projects</li><li>Full material management (Indent → PO → GRN)</li><li>Budget & cost tracking</li><li>Task management</li><li>Auto DPR & WPR generation</li><li>Document hub</li><li>Priority phone support</li></ul><button class="plan-cta" onclick="openModal()">Start Free Trial</button></div><div class="pricing-card"><div class="plan-name">Enterprise</div><div class="plan-price">Custom</div><p class="plan-desc">For large construction companies and contractors</p><ul class="plan-features"><li>Everything in Pro</li><li>Multi-branch management</li><li>Custom workflows & reports</li><li>Dedicated account manager</li><li>On-site onboarding & training</li><li>SLA guarantee</li></ul><button class="plan-cta" onclick="openModal()">Talk to Sales</button></div></div></div></section>
+<section class="cta-section"><h2>Stop managing construction on WhatsApp.</h2><p>See how Buildr works for your business in a free 30-minute demo. No commitment, no credit card.</p><a href="#" class="btn-primary" style="font-size:16px;padding:16px 36px;" onclick="openModal()">Request Your Free Demo</a></section>
+<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><a href="#" class="logo" style="color:white;">Build<span>r</span></a><p>Construction management software built for small and mid-size businesses across India.</p></div><div class="footer-col"><h4>Product</h4><ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Mobile App</a></li><li><a href="#">Security</a></li></ul></div><div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul></div><div class="footer-col"><h4>Support</h4><ul><li><a href="#">Help Centre</a></li><li><a href="#" onclick="openModal()">Request Demo</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 Buildr. All rights reserved. Made in India</p><p>amarnath10106@gmail.com &nbsp;|&nbsp; +91 82487 39046</p></div></div></footer>
+<div class="modal-overlay" id="demoModal" onclick="if(event.target===this)closeModal()"><div class="modal"><button class="modal-close" onclick="closeModal()">×</button><h3>Book your free demo</h3><p class="modal-sub">We'll show you how Buildr works for your specific projects — usually 30 minutes.</p><form id="demoForm"><div class="form-group"><label for="name">Your Name</label><input id="name" name="name" type="text" placeholder="Name" required></div><div class="form-group"><label for="email">Work Email</label><input id="email" name="email" type="email" placeholder="mail@company.com" required></div><div class="form-group"><label for="phone">Phone Number</label><input id="phone" name="phone" type="tel" placeholder="Phone" required></div><div class="form-group"><label for="company">Company Name</label><input id="company" name="company" type="text" placeholder="Your Construction Company" required></div><div class="form-group"><label for="projects">Number of Active Projects</label><select id="projects" name="projects" required><option value="">Select one</option><option>1–3 projects</option><option>4–10 projects</option><option>10+ projects</option></select></div><div class="form-group"><label for="notes">Notes</label><textarea id="notes" name="notes" rows="3" placeholder="Anything specific you want covered in the demo?"></textarea></div><button class="form-submit" type="submit">Book My Demo</button><p class="form-note">This version sends the lead details to your email app and includes a webhook hook for real email automation.</p></form></div></div>
+<script>
+  const OWNER_EMAIL = 'amarnath10106@gmail.com';
+  const WEBHOOK_URL = '';
+  function openModal(){ document.getElementById('demoModal').classList.add('active'); document.body.style.overflow='hidden'; return false; }
+  function closeModal(){ document.getElementById('demoModal').classList.remove('active'); document.body.style.overflow=''; }
+  async function handleDemoSubmit(event){
+    event.preventDefault();
+    const form = event.target;
+    const data = Object.fromEntries(new FormData(form).entries());
+    const subject = `New Buildr demo request from ${data.name}`;
+    const body = ['A new demo request was submitted from the Buildr website.','',`Name: ${data.name}`,`Email: ${data.email}`,`Phone: ${data.phone}`,`Company: ${data.company}`,`Active Projects: ${data.projects}`,`Notes: ${data.notes || 'N/A'}`,`Submitted At: ${new Date().toLocaleString()}`].join('\n');
+    if (WEBHOOK_URL) {
+      try {
+        const response = await fetch(WEBHOOK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ ...data, ownerEmail: OWNER_EMAIL, subject, body }) });
+        if (!response.ok) throw new Error('Webhook failed');
+      } catch (e) {}
+    }
+    window.location.href = `mailto:${OWNER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    document.querySelector('.modal').innerHTML = `<div style="text-align:center;padding:20px 0;"><div style="width:64px;height:64px;border-radius:18px;background:var(--orange-light);color:var(--orange);display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px;"><i data-lucide="circle-check-big" width="30" height="30"></i></div><h3 style="font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:12px;">Request captured</h3><p style="color:var(--gray-500);font-size:15px;margin-bottom:24px;">The demo details have been prepared for email delivery. If you add a webhook URL, this will notify you automatically without opening an email app.</p><button class="btn-primary" onclick="closeModal()">Done</button></div>`;
+    if (window.lucide) lucide.createIcons();
+    form.reset();
+  }
+  document.getElementById('demoForm').addEventListener('submit', handleDemoSubmit);
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => { const href = a.getAttribute('href'); if (href === '#') return; const target = document.querySelector(href); if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); } }));
+  if (window.lucide) lucide.createIcons();
+</script>
+</body>
+</html>
